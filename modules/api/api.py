@@ -173,7 +173,7 @@ class Api:
 
             shared.state.begin()
 
-            processed = run_loopback(p, 2, 0.9)
+            processed = self.run_loopback(p, 3, 0.9)
             if processed is None:
                 processed = process_images(p)
 
@@ -445,7 +445,7 @@ class Api:
         self.app.include_router(self.router)
         uvicorn.run(self.app, host=server_name, port=port)
 
-    def run_loopback(p, loops, denoising_strength_change_factor):
+    def run_loopback(self, p, loops, denoising_strength_change_factor):
         return_grid = False
         processing.fix_seed(p)
         batch_count = p.n_iter
